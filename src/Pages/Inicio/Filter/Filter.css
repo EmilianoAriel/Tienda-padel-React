@@ -1,0 +1,127 @@
+.filters {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    padding: 10px 50px 0;
+    gap: 20px;
+}
+
+.filters input {
+    display: none;
+}
+
+.filters ul, .lista-price {
+    list-style: none;
+    padding-left: 30px;
+    visibility: hidden;
+    position: absolute;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.3s, position 0.3s linear;
+}
+
+.lista-desplegable:checked ~ ul, .lista-desplegable:checked ~ .lista-price {
+    visibility: visible;
+    opacity: 1;
+    position: unset;
+    background-color: rgb(231, 229, 229);
+    border-radius: 0 0 10px 10px;
+}
+
+.filter-categori, .filter-order {
+    width: 200px;
+}
+
+.filter-order {
+    width: 300px;
+}
+
+.filter-categori li, .filter-order li {
+    padding: 5px 0;
+}
+
+.filter-order li {
+    padding: 10px 0;
+}
+
+
+
+.filter-categori label:hover, .filter-order label:hover {
+    color: rgb(252, 156, 22);
+    cursor: pointer;
+}
+
+input[type="checkbox"]:checked + label, input[type="radio"]:checked + label {
+    color: rgb(252, 156, 22);
+}
+
+.label-filtro, .label-order {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    cursor: pointer;
+    font-size: 20px;
+    padding: 7px;
+    transition: all 0.3s;
+}
+
+.label-order {
+    font-size: 15px;
+}
+
+.label-filtro span, .label-order span {
+    font-size: 15px;
+    text-align: center;
+    margin: 5px;
+}
+
+.icono-filtro, .icono-orden {
+    padding-top: 5px;
+    margin-left: auto;
+    transition: transform 0.3s;
+    color: rgb(72, 72, 72);
+}
+
+input[type="checkbox"]:checked + .label-filtro, input[type="checkbox"]:checked + .label-order {
+    color: rgb(179, 178, 178);
+    justify-content: flex-start;
+    background-color: rgb(231, 229, 229);
+    border-radius: 10px 10px 0 0;
+}
+
+input[type="checkbox"]:checked + .label-filtro .icono-filtro {
+    transform: translateX(-550%);
+}
+
+input[type="checkbox"]:checked + .label-order .icono-orden {
+    transform: translateX(-970%);
+}
+
+
+.titulo{
+    text-align: center;
+    margin-top: 20px;
+    font-size: 40px;
+     span{
+        color: rgb(252, 156, 22);
+    }
+}
+
+@media screen and (width < 760px){
+    input[type="checkbox"]:checked + .label-filtro .icono-filtro {
+        transform: translateX(-170%);
+        
+    }
+    input[type="checkbox"]:checked + .label-order .icono-orden {
+        transform: translateX(-300%);
+    }
+
+    .titulo{
+        font-size: 35px;  
+    }
+    
+    .span-titulo{
+        font-size: 30px;
+        margin-bottom: 0;
+    }
+    
+}
