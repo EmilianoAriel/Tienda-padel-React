@@ -1,0 +1,358 @@
+
+
+
+
+.main-infoMi{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding-top: 100px;
+    background-color: rgb(28, 27, 32);
+    color: white;
+    height: auto;
+
+    img {
+        width: 100px;
+        height: 100px;
+    }
+}
+
+.titulo-principal{
+    margin: 30px;
+    color: rgb(110, 80, 216);
+}
+
+.span-principal{
+    width: 1000px;
+    font-size: 25px;
+    margin-bottom: 20px;
+}
+
+.card-proyecto{
+
+    display: flex;
+    flex-direction: row-reverse;
+    height: auto;
+    width: 190vh;
+
+    & .contenedor-derecha{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-content: center;
+    }
+    & .titulo-proyecto{
+        color: rgb(110, 80, 216);
+        margin-top: -120px;
+    }
+    & .img-lenguajes{
+        margin: 20px 40px 40px 20px;
+        width: 600px;
+        height: 350px;
+        filter: drop-shadow(10px 3px 7px rgb(123, 123, 123));
+        
+    }
+
+    &:hover{
+       
+        box-shadow: 0 0 15px #f7f7f726;
+
+        & .contenedor-izquierda{
+            visibility: visible;
+            opacity: 1;
+            margin-right: 0px;
+        }
+    }
+}
+
+.contenedor-izquierda{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 70%;
+    margin-right: -108px;
+    height: auto;
+    visibility: hidden;
+    opacity: 0;
+    transition: all .5s;
+    overflow: hidden;
+    & .contenedor-img{
+        display: flex;
+        object-fit: cover;
+        overflow: hidden;
+        
+        
+        & ul{
+            display: flex;
+            animation: slide 20s infinite alternate ease-in-out;
+            width: 800px;
+            height: auto;
+            
+            & li{
+                list-style: none;
+            }
+        }
+        & .img-pag{
+            
+            width: 800px;
+            height: auto;
+            
+        }
+    
+    }
+    
+    & .subtitulo-proyecto{
+        font-size: 25px;
+        margin: 20px;
+    }
+
+    & .span-proyecto{
+        width: 700px;
+        font-size: 20px;
+        margin: 20px;
+    }
+}
+
+@keyframes slide{
+    0% {margin-left: 0;}
+    20% {margin-left: 0;}
+
+    22% {margin-left: -200%;}
+    42% {margin-left: -200%;}
+
+    44% {margin-left: -400%;}
+    74% {margin-left: -400%;}
+
+    76% {margin-left: -600%;}
+    100% {margin-left: -600%;}
+
+   
+}
+
+
+.card-mi{
+    display: flex;
+    flex-direction: row;
+    width: 190vh;
+    height: auto;
+    margin-top: 70px;
+
+    &:hover{
+       
+        box-shadow: 0 0 15px #f7f7f726;
+
+        & .mi-derecha{
+            visibility: visible;
+            opacity: 1;
+            margin-left: 40px;
+        }
+    }
+    & .mi-izquierda{
+        margin: 35px;
+        padding: 20px;
+        & img{
+            width: 500px;
+            height: auto;
+           }
+        h3{
+            color: rgb(110, 80, 216);
+            font-size: 30px;
+            margin: 20px;
+        }
+    }
+
+
+    & .mi-derecha{
+        display: flex;
+        flex-direction: column;
+        opacity: 0;
+        visibility: hidden;
+        width: 700px;
+        height: auto;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        font-size: 30px;
+        transition: all .3s ease-in;
+        
+        
+        & .redes-mi{
+            display:flex ;
+            flex-direction: row;
+            margin-top: 40px;
+            transition: all .3s ease-in;
+            & .redes{
+                text-align: center;
+                align-content: center;
+                justify-content: center;
+                width: 70px;
+                height: 70px;
+                color: rgb(220, 222, 222);
+                font-size:40px;
+                margin: 5px;
+                border-radius: 50%;
+                
+                transition:all .3s ease-in;
+                
+            }
+
+            
+        }
+    }
+
+    
+  
+}
+.lkdn{
+ transition: all .3s ease-in;
+    &:hover{
+        color: white;
+        background: linear-gradient(to top left,#0077B5, #257fc9 );
+        
+}
+
+}
+
+.gmail{
+    transition: all .3s ease-in;
+       &:hover{
+           color: white;
+           background: linear-gradient(to top left,#f44242 , #ffb6b2 );
+           
+   }
+   
+}
+
+
+.insta{
+    transition: all .3s ease-in;
+       &:hover{
+           color: white;
+           background: linear-gradient(to top left,#eb8aef , #e83968 );
+           
+   }
+   
+}
+
+
+@media screen and (width < 760px){
+
+    .titulo-principal{
+        margin-top: 0;
+        font-size: 25px;
+    }
+    
+    .span-principal{
+        width: 425px;
+        font-size: 20px;
+    }
+    
+    .card-proyecto{
+        flex-direction: column;
+        width: 425px;
+    
+        & .contenedor-derecha{
+            display: flex;
+        
+        }
+        & .titulo-proyecto{
+            margin-top: 10px;
+            font-size: 25px;
+        }
+        & .img-lenguajes{
+            margin:0;
+            width: 425px;
+            height: auto;
+            filter: drop-shadow(10px 3px 7px rgb(123, 123, 123));
+            
+        }
+        &:hover{
+           
+            box-shadow: none;
+    
+        }
+    
+    }
+    
+    .contenedor-izquierda{
+        width: 425px;
+        margin-right: 0px;
+        height: auto;
+        visibility: visible;
+        opacity: 1;
+        
+        & .contenedor-img{
+    
+            
+            
+            & ul{
+                 width: 425px;
+                height: auto;
+                
+            
+            }
+            & .img-pag{
+                
+                width: 425px;
+                height: auto;
+                
+            }
+        
+        }
+        
+        & .subtitulo-proyecto{
+            font-size: 25px;
+            margin: 20px;
+        }
+    
+        & .span-proyecto{
+            width: 425px;
+            font-size: 15px;
+            margin: 20px;
+        }
+    }
+    
+    
+    .card-mi{
+        flex-direction: column;
+        width: 425px;
+        
+    
+        &:hover{
+            box-shadow: none;
+            & .mi-derecha{
+                margin-left: 0;
+            }
+        }
+        & .mi-izquierda{
+            margin: 0;
+            & img{
+                width: 425px;
+                height: auto;
+               
+               }
+            h3{
+                font-size: 25px;
+                
+            }
+        }
+    
+    
+        & .mi-derecha{
+          
+            opacity: 1;
+            visibility: visible;
+            width: 425px;
+            height: auto;
+          
+            font-size: 15px;
+         
+            
+            
+        }      
+    
+    }
+}

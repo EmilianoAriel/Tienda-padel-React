@@ -1,0 +1,130 @@
+footer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-top: dashed 2px rgb(217, 113, 48);
+    margin-top: 20px;
+    width: 100%;
+    height: auto;
+   
+    .footer-redes{
+        display: flex;
+        justify-content: center;
+        
+
+        & .redes{
+            font-size: 40px;
+            text-align: center;
+            align-content: center;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            color: rgb(197, 197, 197);
+            margin: 20px;
+            &.face:hover{
+                background: linear-gradient(to top left, #3b5998, #6b90dc);
+                color: white;
+            }
+
+            &.insta:hover{
+                background: linear-gradient(to top left,#eb8aef , #e83968 );
+                color: white;
+            }
+            &.twit:hover{
+                background-color: black;
+                color: white;
+            }
+        }
+    }
+}
+
+.footer-dark{
+    background-color: rgb(28, 27, 32);
+    color: white;
+    margin-top: 0;
+    border-radius: 0;
+}
+.div-footer{
+    display: flex;
+    flex-direction:column;
+    align-content: center;
+    justify-content: center;
+    text-align: center;
+    width: 33.3%;
+    gap: 20px;      
+    .lista-info{
+        display: flex;
+        flex-direction: column;
+        list-style: none;
+        align-items: center;
+
+        li{
+            display: flex;
+            align-items: center;
+            line-height: 1.5;
+          
+        }
+     .phone, .ubi, .clock{
+        font-size:35px;
+        margin: 20px;
+        vertical-align: middle;
+    }
+    & .phone{
+        color: rgb(81, 81, 81);
+    }
+
+    & .ubi{
+        color: #ea2459;
+    }
+
+    & .clock{
+        color: #c0e852;
+       
+    }
+    & .span-footer{
+             display: inline-block;
+             text-align: center;
+             margin-left: 0;
+             position: relative;
+             left: -15px;
+             width: 350px;
+             
+    
+
+    }
+}
+
+}
+.logo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   
+    width: 33.3%;
+
+     img{
+    
+        width: 200px;
+        height: 200px;
+        
+    }
+ }
+
+ @media screen and (width < 760px) {
+    footer{
+        width: 425px;
+        flex-direction: column;
+    
+        .div-footer{
+            margin-top: 20px;
+            width: 435px;
+            font-size: 15px;
+        }
+    
+        .logo{
+            margin: auto;
+          
+        }
+    }
+    
+ }
