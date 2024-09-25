@@ -1,167 +1,210 @@
-.articulo-card{
-    display: flex;
-    flex-direction: column;
-    border-radius: 10px;
-    width: 300px;
-    margin-bottom: 68px;
-    padding: 20px;
-    &:hover{
-        border: 1px solid #ddd;
-        box-shadow: 0 0 10px #00000026;
-        
-        .footer-card{
-            visibility: visible;
-            opacity: 1;
-            margin-top: 0;
-        }
-        
+.articulo-card {
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  width: 300px;
+  margin-bottom: 68px;
+  padding: 20px;
+  &:hover {
+    border: 1px solid #ddd;
+    box-shadow: 0 0 10px #00000066;
+
+    .footer-card {
+      visibility: visible;
+      opacity: 1;
+      margin-top: 0;
     }
+  }
 }
-.contenedor-img{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 19px;
-    
-      .img-producto{
-        width: 250px;
-        height: 300px;
-        object-fit: contain;
-        
+.contenedor-img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 19px;
 
-
-    }
-
+  .img-producto {
+    width: 250px;
+    height: 300px;
+    object-fit: contain;
+  }
 }
 
-.colores{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    gap: 5px;
-     .color{
-        content: "";
-        border-radius: 50%;
-        width: 25px;
-        height: 25px;
-        border: 1px solid rgb(179, 178, 178);
-        transition: 0.5s ease;
-        cursor: pointer;
-        &:hover{
-            transform: scale(1.4);
-        }
-        
-    }
-
-     .red {
-        background: rgb(217, 113, 48);
-    }
-
-     .green{
-        background-color: rgb(101, 209, 101);
-    }
-     .blue{
-        background-color: rgb(57, 57, 148);
-    }
-}
-
-.info-producto{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    color:rgb(179, 178, 178);
-    padding-bottom: 10px;
-}
-
-.estrellas{
-    font-size: 10px;
-    color: #ffe100;
-}
-.titulo-producto{
-    margin-top: 10px;
-     .link-producto{
-        text-decoration: none;
-        color: rgb(121, 121, 121) ;
-        &:hover{
-            color: rgb(252, 156, 22);
-        }
-    }
-}
-
-
-.precios{
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    align-items: start;
-    margin: 10px 0 10px 0;
-
-    .precio{
-        display:flex;
-        line-height:1.6rem;
-        gap: 10px;
-
-        .span-precio{
-            color: rgb(252, 156, 22);
-            font-size: 20px;
-            font-weight:bold;
-            &.tachado{
-                font-weight: lighter;
-                font-size: 15px ;
-                text-decoration: line-through;
-                 color: rgb(197, 197, 197); 
-            }
-        }
-    }
-    
-
-    
-
-
-}
-
-.precio-cuotas{
-    display: flex;
-    font-size: 15px;
-    margin-top: 10px;
-    color: rgb(171, 171, 171); 
-}
-.btn-footer{
-    background-color: rgb(245, 242, 242);
-    border: none;
-    border-radius: 5px;
+.colores {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 5px;
+  .color {
+    content: "";
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    border: 1px solid rgb(179, 178, 178);
+    transition: 0.5s ease;
     cursor: pointer;
+    &:hover {
+      transform: scale(1.4);
+    }
+  }
+
+  .red {
+    background: rgb(217, 113, 48);
+  }
+
+  .green {
+    background-color: rgb(101, 209, 101);
+  }
+  .blue {
+    background-color: rgb(57, 57, 148);
+  }
 }
 
-.footer-card{
-    padding-top: 16px;
+.info-producto {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  color: rgb(179, 178, 178);
+  padding-bottom: 10px;
+}
+
+.estrellas {
+  font-size: 10px;
+  color: #ffe100;
+}
+.titulo-producto {
+  margin-top: 10px;
+  .link-producto {
+    text-decoration: none;
+    color: rgb(121, 121, 121);
+    &:hover {
+      color: rgb(252, 156, 22);
+    }
+  }
+}
+
+.precios {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: start;
+  margin: 10px 0 10px 0;
+
+  .precio {
     display: flex;
-    gap: 4px;
-    align-items: center;
-    color: #242424;
-    opacity: 0;
-    visibility: hidden;
-    margin-top: -68px;
-    transition: all 0.3s;
-}
-.comprar{
-    width: 100px;
-    height: 40px;
-    font-size: 20px;
-    background-color: rgb(232, 232, 232);
-    color: #242424;
-    &:hover{
-        color: rgb(252, 156, 22);
+    line-height: 1.6rem;
+    gap: 10px;
+
+    .span-precio {
+      color: rgb(252, 156, 22);
+      font-size: 20px;
+      font-weight: bold;
+      &.tachado {
+        font-weight: lighter;
+        font-size: 15px;
+        text-decoration: line-through;
+        color: rgb(197, 197, 197);
+      }
     }
+  }
 }
 
-.guardar, .carrito{
-    width: 40px;
-    height: 40px;
-    font-size: 20px;
-    color: #242424;
-    &:hover{
-        background: rgb(248, 204, 57);
-        color: rgb(49, 79, 91);
+.precio-cuotas {
+  display: flex;
+  font-size: 15px;
+  margin-top: 10px;
+  color: rgb(171, 171, 171);
+}
+.btn-footer {
+  background-color: rgb(245, 242, 242);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.footer-card {
+  padding-top: 16px;
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  color: #242424;
+  opacity: 0;
+  visibility: hidden;
+  margin-top: -68px;
+  transition: all 0.3s;
+}
+.comprar {
+  width: 100px;
+  height: 40px;
+  font-size: 20px;
+  background-color: rgb(232, 232, 232);
+  color: #242424;
+  &:hover {
+    color: rgb(252, 156, 22);
+  }
+}
+
+.guardar,
+.carrito {
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
+  color: #242424;
+  &:hover {
+    background: rgb(248, 204, 57);
+    color: rgb(49, 79, 91);
+  }
+}
+
+@media screen and (width < 760px) {
+  .articulo-card {
+    width: 200px;
+    height: 450px;
+    .colores {
+      margin-bottom: -40px;
+
+      .color {
+        width: 20px;
+        height: 20px;
+      }
     }
+    .contenedor-img {
+      margin: 0;
+      width: 150px;
+    }
+    .img-producto {
+      width: 150px;
+    }
+
+    .info-producto {
+      margin-top: -40px;
+      font-size: 10px;
+    }
+    .estrellas {
+      font-size: 7px;
+    }
+
+    .titulo-producto {
+      font-size: 13px;
+    }
+
+    .precio-normal,
+    .precio-cuotas {
+      font-size: 13px;
+    }
+
+    .precio-promo {
+      font-size: 15px;
+    }
+
+    .footer-card {
+      .btn-footer {
+        width: 30px;
+        height: 30px;
+        font-size: 15px;
+      }
+      .comprar {
+        width: 60px;
+      }
+    }
+  }
 }

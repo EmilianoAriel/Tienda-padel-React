@@ -1,9 +1,7 @@
-
-.productos{
-
-    display: flex;
-    margin-top:100px ;
-    gap: 1rem;
-    flex-wrap: wrap;
-    justify-content: center;
+.productos {
+  display: flex;
+  margin-top: 100px;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
 }

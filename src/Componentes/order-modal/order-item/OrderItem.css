@@ -71,3 +71,39 @@
     font-weight: bolder;
   }
 }
+
+@media screen and (width < 760px) {
+  .order-item {
+    .item-image img {
+      width: 55px;
+      height: 55px;
+      margin: 0;
+    }
+    .item-info {
+      .item-name {
+        font-size: 15px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: 7rem;
+      }
+      .item-buttons {
+        .btn-info-order {
+          font-size: 11px;
+        }
+      }
+    }
+
+    .item-count {
+      width: 4.5rem;
+      font-size: 13px;
+      .btn-count {
+        font-size: 20px;
+      }
+    }
+
+    .item-price {
+      font-size: 13px;
+    }
+  }
+}
