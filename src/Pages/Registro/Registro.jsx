@@ -1,16 +1,19 @@
-import React from 'react'
-import './Registro.css'
+import React from "react";
+import "./Registro.css";
+import FormRegister from "./FormRegister/FormRegister";
 export default function Registro() {
   return (
     <>
-    
-    <main className="main-formulario">
+      <main className="main-formulario">
         <aside className="aside-tenis">
-            <div className="pelota-tenis">
-                <div className="linea-tenis"></div>
-            </div>
+          <div className="pelota-tenis">
+            <div className="linea-tenis"></div>
+          </div>
         </aside>
-        <div autocomplete="on" className="formulario">
+
+        <FormRegister />
+
+        {/* <div autocomplete="on" className="formulario">
             <h1 className="titulo-form">Registro</h1>
             <hr/>
             <form>
@@ -35,9 +38,8 @@ export default function Registro() {
                 <textarea id="text" name="text" className="input-form" maxlength="150"></textarea>
                 <input type="submit" className="btn-form"/>
             </form>
-        </div>
-    </main>
-    
+        </div> */}
+      </main>
     </>
-  )
+  );
 }
