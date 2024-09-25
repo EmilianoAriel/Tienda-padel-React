@@ -1,0 +1,156 @@
+.contenedor-registro {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  height: auto;
+  margin-top: 20px;
+  align-items: center;
+  justify-content: center;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    width: 25rem;
+    height: auto;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-radius: 6px;
+    margin-top: 10px;
+
+    .input-register {
+      width: 20rem;
+      height: auto;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      text-align: center;
+
+      padding-top: 10px;
+      input,
+      select {
+        margin-top: 10px;
+        height: 50px;
+        width: 270px;
+        border-radius: 6px;
+        outline: none;
+        padding: 10px;
+        border: none;
+        background: rgb(226, 226, 226);
+        appearance: none;
+      }
+
+      label {
+        display: flex;
+        position: absolute;
+        font-size: 15px;
+        top: 60%;
+        left: 35px;
+        transform: translateY(-40%);
+        pointer-events: none;
+        transition: 0.3s;
+        font-weight: bold;
+        color: rgb(186, 186, 186);
+        gap: 5px;
+      }
+
+      .class-error:focus {
+        border: solid 1px crimson;
+      }
+
+      input:focus ~ label,
+      select:focus ~ label {
+        top: 20px;
+        left: 45px;
+        font-size: 12px;
+        padding: 0 2px;
+        background-color: white;
+        color: rgb(118, 118, 215);
+      }
+
+      input:focus ~ .error {
+        color: crimson;
+      }
+
+      input:focus,
+      select:focus {
+        border: solid 1px rgb(118, 118, 215);
+        background: none;
+      }
+
+      input:not(:placeholder-shown) ~ label,
+      select:not(:empty) ~ label {
+        top: 20px;
+        left: 45px;
+        font-size: 12px;
+        padding: 0 2px;
+        background-color: white;
+        color: rgb(118, 118, 215);
+      }
+      input:not(:placeholder-shown),
+      select:not(:empty) {
+        background-color: white;
+        border: solid 1px rgb(118, 118, 215);
+      }
+    }
+
+    .btn-insc {
+      display: flex;
+      font-size: 15px;
+      margin-top: 20px;
+      color: rgb(255, 255, 255);
+      width: 15rem;
+      height: 40px;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(
+        to left,
+        rgb(227, 242, 88),
+        rgb(160, 227, 51)
+      );
+      border: none;
+      border-radius: 10px;
+      transition: 0.3s;
+      cursor: pointer;
+
+      &:active {
+        transform: scale(0.7);
+      }
+
+      &:disabled {
+        background: rgb(76, 76, 76);
+        color: rgb(185, 185, 185);
+        opacity: 0.25;
+        pointer-events: none;
+      }
+    }
+
+    .input-error {
+      width: 200px;
+      font-size: 0.75rem;
+      color: red;
+      position: relative;
+      top: 5px;
+    }
+  }
+
+  .btn-IS {
+    display: flex;
+    font-size: 15px;
+    margin-top: 20px;
+    color: rgb(255, 255, 255);
+    width: 8rem;
+    height: 40px;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to left, rgb(242, 224, 88), rgb(160, 227, 51));
+    border: none;
+    border-radius: 10px;
+    transition: 0.3s;
+    cursor: pointer;
+
+    &:active {
+      transform: scale(0.7);
+    }
+  }
+}
