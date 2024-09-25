@@ -154,3 +154,9 @@
     }
   }
 }
+
+@media screen and (width < 760px) {
+  .contenedor-registro {
+    width: 425px;
+  }
+}
