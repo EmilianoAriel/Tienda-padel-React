@@ -61,7 +61,17 @@ export default function ListaProductos({ updateKey, onEditProd }) {
   return (
     <>
       <div className="tabla-admin">
-        <input type="text" name="" id="" onChange={search} />
+        <div className="contenedor-buscador">
+          <input
+            type="text"
+            name=""
+            id="search"
+            onChange={search}
+            className="search"
+            placeholder=""
+          />
+          <label htmlFor="search">Busqueda del producto</label>
+        </div>
         <table className="product-table">
           <thead class="encabezado-lista">
             <tr>
