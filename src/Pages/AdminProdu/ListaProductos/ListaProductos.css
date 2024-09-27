@@ -76,7 +76,63 @@ td {
     transform: scale(0.5);
   }
 }
+.contenedor-buscador {
+  position: relative;
+  padding: 10px 0 10px 0;
 
+  input {
+    margin-top: 10px;
+    height: 50px;
+    width: 270px;
+    border-radius: 6px;
+    outline: none;
+    padding: 10px;
+    border: none;
+    background: rgb(226, 226, 226);
+    appearance: none;
+  }
+
+  label {
+    display: flex;
+    position: absolute;
+    font-size: 15px;
+    top: 55%;
+    left: 25px;
+    transform: translateY(-40%);
+    pointer-events: none;
+    transition: 0.3s;
+    font-weight: bold;
+    color: rgb(186, 186, 186);
+    gap: 5px;
+  }
+
+  input:focus ~ label {
+    top: 20px;
+    left: 45px;
+    font-size: 12px;
+    padding: 0 2px;
+    background-color: white;
+    color: #17d37e;
+  }
+
+  input:focus {
+    border: solid 1px #17d37e;
+    background: none;
+  }
+  input:not(:placeholder-shown) ~ label {
+    top: 20px;
+    left: 45px;
+    font-size: 12px;
+    padding: 0 2px;
+    background-color: white;
+    color: #17d37e;
+  }
+
+  input:not(:placeholder-shown) {
+    background-color: white;
+    border: solid 1px #17d37e;
+  }
+}
 @media screen and (width < 760px) {
   .tabla-admin {
     width: 425px;
