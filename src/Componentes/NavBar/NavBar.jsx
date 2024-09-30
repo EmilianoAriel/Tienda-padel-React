@@ -6,6 +6,8 @@ import logoImg from "../../assets/Fotos/Baner/Tienda-removebg-preview.png";
 import { NavLink } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { useOrder } from "../../context/OrderContext";
+import Modal from "../PopUp/PopUp";
+import PopUp from "../PopUp/PopUp";
 
 export default function NavBar({ setModal, showModal }) {
   const location = useLocation();
@@ -72,6 +74,8 @@ export default function NavBar({ setModal, showModal }) {
           <FontAwesomeIcon icon={faUser} className="user" />
         </div>
       </header>
+
+      <PopUp />
     </>
   );
 }

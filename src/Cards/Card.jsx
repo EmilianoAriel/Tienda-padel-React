@@ -7,7 +7,7 @@ import "./card.css";
 import { useOrder } from "../context/OrderContext";
 
 export default function Card({ product }) {
-  const { addProduct } = useOrder();
+  const { addProduct, callPopUp } = useOrder();
   return (
     <article className="articulo-card">
       <div className="header-card">
@@ -80,7 +80,10 @@ export default function Card({ product }) {
         </button>
         <button
           className="btn-footer carrito"
-          onClick={() => addProduct(product)}
+          onClick={() => {
+            addProduct(product);
+            // callPopUp(product);
+          }}
         >
           <FontAwesomeIcon icon={faCartPlus} />
         </button>
