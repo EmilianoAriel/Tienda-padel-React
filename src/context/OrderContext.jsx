@@ -10,7 +10,9 @@ export default function OrderProvider({ children }) {
   const [order, setOrder] = useState([]);
   const [toggleModal, setToggleModal] = useState(false);
   const [total, setTotal] = useState(0);
-
+  const [popUp, setPopUp] = useState([]);
+  const [popVisible, setPopVisible] = useState(false);
+  const [cantidadPop, setCantidadPop] = useState(1);
   useEffect(() => {
     incCount();
     calcularTotal();
@@ -20,16 +22,14 @@ export default function OrderProvider({ children }) {
     const prodExist = order.find(prod => prod.id === product.id);
 
     if (cantidad) {
-      console.log(prodExist);
       if (prodExist) {
         prodExist.quantity += cantidad;
         setOrder([...order]);
-        console.log(prodExist);
       } else {
         product.quantity = cantidad;
         setOrder([...order, product]);
-        console.log("producto no existe");
       }
+      setCantidadPop(cantidad);
     } else {
       if (prodExist) {
         prodExist.quantity++;
@@ -37,18 +37,20 @@ export default function OrderProvider({ children }) {
       } else {
         product.quantity = 1;
         setOrder([...order, product]);
+
+        console.log(order);
       }
+      setCantidadPop(1);
     }
 
-    Swal.fire({
-      position: "top-end",
-      icon: "success",
-      title: "Your work has been saved",
-      showConfirmButton: false,
-      timer: 1500,
-    });
+    setPopUp(product);
+    setPopVisible(true);
 
-    console.log(product.quantity);
+    setTimeout(() => {
+      setPopVisible(false);
+    }, 2000);
+
+    console.log(cantidad);
   }
 
   function incCount() {
@@ -107,6 +109,10 @@ export default function OrderProvider({ children }) {
         sumProduct,
         count,
         setCount,
+        popUp,
+        cantidadPop,
+        setCantidadPop,
+        popVisible,
       }}
     >
       {children}
