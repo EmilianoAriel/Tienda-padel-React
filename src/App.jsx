@@ -10,6 +10,7 @@ import AdminProdu from "./Pages/AdminProdu/AdminProdu";
 import Detalles from "./Pages/Detalles/Detalles";
 import OrderModal from "./Componentes/order-modal/OrderModal";
 import { useEffect, useState } from "react";
+import AdminUser from "./Pages/AdminUsers/AdminUser";
 
 function App() {
   const location = useLocation();
@@ -34,6 +35,8 @@ function App() {
         <Route path="/registro" element={<Registro />} />
 
         <Route path="/adminProdu" element={<AdminProdu />} />
+
+        <Route path="/adminUser" element={<AdminUser />} />
       </Routes>
 
       <Footer className={isAcercaDe ? "style-black" : ""} />

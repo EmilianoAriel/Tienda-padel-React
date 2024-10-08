@@ -1,5 +1,4 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import Swal from "sweetalert2";
 
 const OrderContext = createContext();
 
@@ -13,6 +12,7 @@ export default function OrderProvider({ children }) {
   const [popUp, setPopUp] = useState([]);
   const [popVisible, setPopVisible] = useState(false);
   const [cantidadPop, setCantidadPop] = useState(1);
+  const [filters, setFilters] = useState([]);
   useEffect(() => {
     incCount();
     calcularTotal();
@@ -113,6 +113,8 @@ export default function OrderProvider({ children }) {
         cantidadPop,
         setCantidadPop,
         popVisible,
+        filters,
+        setFilters,
       }}
     >
       {children}

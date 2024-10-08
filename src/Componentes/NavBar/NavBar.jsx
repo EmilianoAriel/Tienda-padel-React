@@ -59,6 +59,12 @@ export default function NavBar({ setModal, showModal }) {
                   ADMIN PRODUCTO
                 </NavLink>
               </li>
+
+              <li className="nav-item">
+                <NavLink className="nav-link" to="/adminUser">
+                  ADMIN USERS
+                </NavLink>
+              </li>
             </ul>
           </div>
         </nav>
