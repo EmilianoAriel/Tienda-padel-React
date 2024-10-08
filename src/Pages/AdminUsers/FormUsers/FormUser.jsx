@@ -85,7 +85,11 @@ export default function FormUser({ onFormSubmit, userEdit, setUserEdit }) {
             <input
               id="name"
               type="text"
-              {...register("name", { required: true, minLength: 3 })}
+              {...register("name", {
+                required: true,
+                minLength: 3,
+                maxLength: 30,
+              })}
             />
 
             {errors.name?.type === "required" && (
@@ -116,12 +120,27 @@ export default function FormUser({ onFormSubmit, userEdit, setUserEdit }) {
               id="promo"
               type="password"
               {...register("password", {
-                min: "1",
+                required: "La contraseña es requerida",
+                minLength: {
+                  value: 6,
+                  message: "Mínimo 6 caracteres",
+                },
+                maxLength: {
+                  value: 12,
+                  message: "Máximo 12 caracteres",
+                },
+                validate: {
+                  hasUpperCase: value =>
+                    /[A-Z]/.test(value) ||
+                    "Debe tener al menos una letra mayúscula",
+                  hasNumber: value =>
+                    /\d/.test(value) || "Debe tener al menos un número",
+                },
               })}
             />
 
-            {errors.promo?.type === "min" && (
-              <div className="input-error">Precio negativo</div>
+            {errors.password?.type && (
+              <div className="input-error">{errors.password.message}</div>
             )}
           </div>
 
