@@ -30,12 +30,11 @@ export default function FormularioAdmin({
     formState: { errors, isValid },
   } = useForm({ mode: "onChange" });
 
-  const handleSectionChange = (event) => {
+  const handleSectionChange = event => {
     setSelectedSection(event.target.value);
   };
 
   async function onProductsSubmits(producto) {
-    const starTime = Date.now();
     try {
       if (prodEdit) {
         const { id } = prodEdit;
@@ -56,13 +55,12 @@ export default function FormularioAdmin({
         const response = await axios.post(`${URL}/products`, producto);
         console.log(response.data);
 
-        const elapsedTime = Date.now() - starTime;
         Swal.fire({
           title: "Subido!",
           text: "Su producto se subio con exito",
           icon: "success",
           showConfirmButton: false,
-          timer: elapsedTime,
+          timer: 1500,
         });
       }
 
@@ -166,7 +164,7 @@ export default function FormularioAdmin({
               onChange={handleSectionChange}
             >
               <option value="">Seleccione una sección</option>
-              {Object.keys(tiposPorSeccion).map((section) => (
+              {Object.keys(tiposPorSeccion).map(section => (
                 <option key={section} value={section}>
                   {section}
                 </option>
@@ -182,7 +180,7 @@ export default function FormularioAdmin({
             <select id="type" {...register("type", { required: true })}>
               <option value="">Seleccione un tipo</option>
               {selectedSection &&
-                tiposPorSeccion[selectedSection].map((tipo) => (
+                tiposPorSeccion[selectedSection].map(tipo => (
                   <option key={tipo} value={tipo}>
                     {tipo}
                   </option>
@@ -263,7 +261,7 @@ export default function FormularioAdmin({
               </button>
               <button
                 className=" btn-cancelar"
-                onClick={(e) => {
+                onClick={e => {
                   e.preventDefault();
                   reset();
                   setProdEdit(null);

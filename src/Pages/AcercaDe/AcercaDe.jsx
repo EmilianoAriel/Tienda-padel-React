@@ -1,4 +1,4 @@
-import React from 'react'
+
 import './AcercaDe.css'
 import FotoUno from '../../assets/Fotos/Acerca de mi/CSS_Examples-removebg-preview.png'
 import FotoDos from '../../assets/Fotos/Acerca de mi/2024-05-19 (1).png'

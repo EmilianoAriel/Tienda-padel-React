@@ -7,7 +7,7 @@ import "./card.css";
 import { useOrder } from "../context/OrderContext";
 
 export default function Card({ product }) {
-  const { addProduct, callPopUp } = useOrder();
+  const { addProduct } = useOrder();
   return (
     <article className="articulo-card">
       <div className="header-card">
