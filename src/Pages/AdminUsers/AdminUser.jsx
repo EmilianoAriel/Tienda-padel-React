@@ -16,7 +16,7 @@ export default function AdminUser() {
 
   return (
     <main className="main-admin">
-      <h1 className="titulo-admin">Administrador Productos</h1>
+      <h1 className="titulo-admin">Administrador Usuarios</h1>
       <section className="section-admin">
         <FormUser
           onFormSubmit={handleUpdate}
