@@ -6,10 +6,12 @@ import { faEnvelope, faUser } from "@fortawesome/free-regular-svg-icons";
 import { faLock } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import Swal from "sweetalert2";
+import useApi from "../../../services/interceptor/interceptor";
 
 const URL = import.meta.env.VITE_SERVER_URL;
 
-export default function FormRegister() {
+export default function FormRegister({ change }) {
+  const api = useApi();
   const {
     register,
     handleSubmit,
@@ -19,21 +21,31 @@ export default function FormRegister() {
   } = useForm({ mode: "onChange" });
 
   async function onUserSubmit(user) {
-    const starTime = Date.now();
     try {
-      const response = await axios.post(`${URL}/Users`, user);
-      console.log(response);
-      const elapsedTime = Date.now() - starTime;
+      const formData = new FormData();
+      formData.append("name", user.name);
+      formData.append("email", user.email);
+      formData.append("password", user.password);
+      formData.append("location", user.location);
+      formData.append("bornDate", user.bornDate);
+      if (user.image[0]) {
+        formData.append("image", user.image[0]);
+      }
+
+      const response = await api.post(`/users`, formData);
+
+      // if (response.status === 200) {
+      // }
       Swal.fire({
         title: "Registrado!",
-        text: "Registrado con exito",
+        text: "Registrado con éxito",
         icon: "success",
         showConfirmButton: false,
-        timer: elapsedTime,
+        timer: 1500,
       });
       reset();
     } catch (error) {
-      console.log("error");
+      console.error("Error en el registro:", error);
     }
   }
 
@@ -69,14 +81,14 @@ export default function FormRegister() {
           <div className="input-register">
             <input
               type="email"
-              id="mail"
+              id="email"
               placeholder=""
-              {...register("mail", {
+              {...register("email", {
                 required: true,
               })}
-              className={errors.mail ? "class-error" : ""}
+              className={errors.email ? "class-error" : ""}
             />
-            <label htmlFor="mail" className={errors.mail ? "error" : ""}>
+            <label htmlFor="mail" className={errors.email ? "error" : ""}>
               Correo Electronico
               <FontAwesomeIcon icon={faEnvelope} />
             </label>
@@ -101,10 +113,10 @@ export default function FormRegister() {
                   message: "Máximo 12 caracteres",
                 },
                 validate: {
-                  hasUpperCase: value =>
+                  hasUpperCase: (value) =>
                     /[A-Z]/.test(value) ||
                     "Debe tener al menos una letra mayúscula",
-                  hasNumber: value =>
+                  hasNumber: (value) =>
                     /\d/.test(value) || "Debe tener al menos un número",
                 },
               })}
@@ -128,7 +140,7 @@ export default function FormRegister() {
               placeholder=""
               {...register("confirm", {
                 required: true,
-                validate: value => value === watch("password"),
+                validate: (value) => value === watch("password"),
               })}
               className={errors.confirm ? "class-error" : ""}
             />
@@ -142,9 +154,9 @@ export default function FormRegister() {
           <div className="input-register">
             <select
               name=""
-              id="country"
+              id="location"
               placeholder=""
-              {...register("country", {
+              {...register("location", {
                 required: true,
               })}
             >
@@ -157,16 +169,16 @@ export default function FormRegister() {
               <option value="US">Estados Unidos</option>
               <option value="UK">Inglaterra</option>
             </select>
-            <label htmlFor="country">Seleccione un Pais</label>
+            <label htmlFor="location">Seleccione un Pais</label>
           </div>
 
           <div className="input-register">
             <input
-              type="url"
+              type="file"
               name="image"
               id="image"
               placeholder=""
-              {...register("image", { required: true })}
+              {...register("image", { required: false })}
               className={errors.image ? "class-error" : ""}
             />
             <label htmlFor="image" className={errors.image ? "error" : ""}>
@@ -176,11 +188,33 @@ export default function FormRegister() {
           {errors.image?.type === "required" && (
             <div className="input-error">El campo es requerido</div>
           )}
+
+          <div className="input-register">
+            <input
+              type="date"
+              name="date"
+              id="date"
+              placeholder=""
+              {...register("bornDate", { required: true })}
+              className={errors.bornDate ? "class-error" : ""}
+            />
+            <label
+              htmlFor="bornDate"
+              className={errors.bornDate ? "error" : ""}
+            >
+              Coloque Fecha
+            </label>
+          </div>
+          {errors.image?.type === "required" && (
+            <div className="input-error">El campo es requerido</div>
+          )}
           <button type="submit" className="btn-insc" disabled={!isValid}>
             Registrese
           </button>
         </form>
-        <button className="btn-IS">Iniciar Sesion</button>
+        <button className="btn-IS" onClick={() => change()}>
+          Iniciar Sesion
+        </button>
       </div>
     </>
   );

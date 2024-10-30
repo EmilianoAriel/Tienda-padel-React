@@ -4,13 +4,23 @@ import "./ListUsers.css";
 import Swal from "sweetalert2";
 import { MagicMotion } from "react-magic-motion";
 import Users from "./Users/Users";
+import { useUser } from "../../../context/UserContext";
+import useApi from "../../../services/interceptor/interceptor";
 const URL = import.meta.env.VITE_SERVER_URL;
+const URL2 = import.meta.env.VITE_LOCAL_SERVER;
+
 export default function ListUser({ updateKey, onEditUs }) {
+  const api = useApi();
+  const { token } = useUser();
   const [users, setUsers] = useState([]);
   const [searchInput, setSearchInput] = useState("");
   async function getProducts() {
     try {
-      const get = await axios.get(`${URL}/Users`);
+      const get = await api.get(`/users`, {
+        headers: {
+          authorization: token,
+        },
+      });
       setUsers(get.data);
     } catch (error) {}
   }
@@ -29,10 +39,10 @@ export default function ListUser({ updateKey, onEditUs }) {
       confirmButtonText: "Si,eliminar!",
       confirmButtonColor: "#d33",
       cancelButtonText: "Cancelar",
-    }).then(async result => {
+    }).then(async (result) => {
       try {
         if (result.isConfirmed) {
-          const response = await axios.delete(`${URL}/Users/${id}`);
+          const response = await api.delete(`/users/${id}`);
           getProducts();
           Swal.fire({
             title: "Eliminado!",
@@ -77,7 +87,6 @@ export default function ListUser({ updateKey, onEditUs }) {
             <tr>
               <th>Imagen Usuario</th>
               <th>Nombre Usuario</th>
-              <th>Contraseña</th>
               <th>Email</th>
               <th>Region</th>
               <th>Edit</th>
@@ -86,16 +95,17 @@ export default function ListUser({ updateKey, onEditUs }) {
           <MagicMotion>
             <tbody className="body-table">
               {searchInput.length <= 0
-                ? users.map(user => (
+                ? users.map((user) => (
                     <Users
-                      key={user.id}
+                      key={user._id}
                       user={user}
+                      URL={URL2}
                       deleteUser={deleteUser}
                       onEditUs={onEditUs}
                     />
                   ))
                 : (() => {
-                    const filteredProducts = products.filter(product =>
+                    const filteredProducts = products.filter((product) =>
                       product.name
                         .toLowerCase()
                         .includes(searchInput.toLowerCase())
@@ -109,9 +119,9 @@ export default function ListUser({ updateKey, onEditUs }) {
                       );
                     }
 
-                    return filteredProducts.map(prod => (
+                    return filteredProducts.map((prod) => (
                       <Users
-                        key={prod.id}
+                        key={prod._id}
                         user={prod}
                         deleteUser={deleteUser}
                         onEditUs={onEditUs}

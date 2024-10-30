@@ -1,10 +1,10 @@
-import React from "react";
-import "./Registro.css";
-import FormRegister from "./FormRegister/FormRegister";
+import './Registro.css';
+import FormRegister from './FormRegister/FormRegister';
+
 export default function Registro() {
   return (
     <>
-      <main className="main-formulario">
+      <main className={`main-formulario `}>
         <aside className="aside-tenis">
           <div className="pelota-tenis">
             <div className="linea-tenis"></div>
