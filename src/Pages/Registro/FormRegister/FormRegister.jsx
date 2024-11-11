@@ -34,8 +34,6 @@ export default function FormRegister({ change }) {
 
       const response = await api.post(`/users`, formData);
 
-      // if (response.status === 200) {
-      // }
       Swal.fire({
         title: "Registrado!",
         text: "Registrado con éxito",

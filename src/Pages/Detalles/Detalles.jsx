@@ -4,8 +4,9 @@ import { useParams } from "react-router-dom";
 import "./Detalles.css";
 import { formatPrice } from "../../Utilis/formatPrice";
 import { useOrder } from "../../context/OrderContext";
+import useApi from "../../services/interceptor/interceptor";
 
-const URL = import.meta.env.VITE_SERVER_URL;
+const URL = import.meta.env.VITE_LOCAL_SERVER;
 
 const imgPrueba =
   "https://glistening-cascaron-d3b657.netlify.app/Fotos/Paletas%20padel/Paleta%20training%20control%2020.jpg";
@@ -16,19 +17,13 @@ export default function Detalles() {
   const [contador, setContador] = useState(1);
   const [imagenPrincipal, setImagenPrincipal] = useState([]);
   const { id } = useParams();
+  const api = useApi();
 
-  useEffect(() => {
-    getProductsCards();
-  }, []);
-
-  useEffect(() => {
-    setContador(1);
-  }, [addProduct]);
   async function getProductsCards() {
     try {
-      const response = await axios.get(`${URL}/products/${id}`);
-      setProduct(response.data);
-      console.log(response.data);
+      const response = await api.get(`/products/${id}`);
+      setProduct(response.data.product);
+      console.log(response.data.product);
     } catch (error) {}
   }
   function Suma() {
@@ -48,6 +43,14 @@ export default function Detalles() {
     Resta();
   }, []);
 
+  useEffect(() => {
+    getProductsCards();
+  }, []);
+
+  useEffect(() => {
+    setContador(1);
+  }, [addProduct]);
+
   function changeImage(src) {
     setImagenPrincipal(src);
   }
@@ -60,7 +63,11 @@ export default function Detalles() {
       <div className="card-info_produ">
         <div className="imagen-produ">
           <img
-            src={imagenPrincipal ? imagenPrincipal : product.image}
+            src={
+              imagenPrincipal
+                ? imagenPrincipal
+                : `${URL}/images/products/${product.image}`
+            }
             alt={product.name}
             className="imagen-detalle_principal"
             id="imagen-principal"
@@ -104,11 +111,13 @@ export default function Detalles() {
                 <div className="color-producto">
                   <div className="color-uno img-color">
                     <img
-                      src={product.image}
+                      src={`${URL}/images/products/${product.image}`}
                       id="imagen-principal"
                       alt=""
                       className="imagen-color activo"
-                      onClick={() => changeImage(product.image)}
+                      onClick={() =>
+                        changeImage(`${URL}/images/products/${product.image}`)
+                      }
                     />
                   </div>
                   <div className="color-dos img-color">

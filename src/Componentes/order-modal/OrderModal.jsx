@@ -6,18 +6,18 @@ import { formatPrice } from "../../Utilis/formatPrice";
 import { MagicMotion } from "react-magic-motion";
 
 export default function OrderModal() {
-  const { order, toggleModal, setToggleModal, total } = useOrder();
+  const { order, toggleModal, setToggleModal, total, finishOrder } = useOrder();
 
   if (!toggleModal) return;
   return (
     <div className="modal-overlay" onClick={() => setToggleModal(!toggleModal)}>
-      <div className="modal-content" onClick={e => e.stopPropagation()}>
+      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
         <div className="modal-header">Carrito de compras</div>
         <MagicMotion>
           <div className="modal-body">
             <ul className="order-list">
-              {order.map(item => (
-                <OrderItem key={item.id} item={item} />
+              {order.map((item) => (
+                <OrderItem key={item._id} item={item} />
               ))}
 
               <li className="list-total">
@@ -38,7 +38,9 @@ export default function OrderModal() {
           >
             Cerrar
           </button>
-          <button className="btn-modal finalizar">Finalizar compra</button>
+          <button className="btn-modal finalizar" onClick={() => finishOrder()}>
+            Finalizar compra
+          </button>
         </div>
       </div>
     </div>

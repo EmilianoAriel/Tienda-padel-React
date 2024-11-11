@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import Swal from "sweetalert2";
 import "./FormularioAdmin.css";
+import useApi from "../../../services/interceptor/interceptor";
 
 const URL = import.meta.env.VITE_SERVER_URL;
 
@@ -30,15 +31,36 @@ export default function FormularioAdmin({
     formState: { errors, isValid },
   } = useForm({ mode: "onChange" });
 
-  const handleSectionChange = event => {
+  const api = useApi();
+
+  const handleSectionChange = (event) => {
     setSelectedSection(event.target.value);
   };
 
   async function onProductsSubmits(producto) {
     try {
+      const formData = new FormData();
+      formData.append("name", producto.name);
+      formData.append("price", producto.price);
+      formData.append("promo", producto.promo);
+      formData.append("section", producto.section);
+      formData.append("type", producto.type);
+      formData.append("fechaIngreso", producto.fechaIngreso);
+      formData.append("cuotas", producto.cuotas);
+      formData.append("description", producto.description);
+      if (producto.image[0]) {
+        formData.append("image", producto.image[0]);
+      }
+      console.log(formData);
+
       if (prodEdit) {
-        const { id } = prodEdit;
-        const response = await axios.put(`${URL}/products/${id}`, producto);
+        const { _id: id } = prodEdit;
+        const image = producto.image[0];
+        if (image) {
+          formData.delete("image");
+          formData.append("image", image);
+        }
+        const response = await api.put(`/products/${id}`, formData);
 
         Swal.fire({
           title: "Actualizado!",
@@ -50,10 +72,8 @@ export default function FormularioAdmin({
 
         setProdEdit(null);
         reset();
-        console.log(prodEdit);
       } else {
-        const response = await axios.post(`${URL}/products`, producto);
-        console.log(response.data);
+        const response = await api.post(`/products`, formData);
 
         Swal.fire({
           title: "Subido!",
@@ -67,9 +87,10 @@ export default function FormularioAdmin({
       reset();
       onFormSubmit();
     } catch (error) {
-      console.log(errors);
+      console.log("Ocurrio un error", error);
     }
   }
+
   useEffect(() => {
     if (prodEdit) {
       setSelectedSection(prodEdit.section);
@@ -164,7 +185,7 @@ export default function FormularioAdmin({
               onChange={handleSectionChange}
             >
               <option value="">Seleccione una sección</option>
-              {Object.keys(tiposPorSeccion).map(section => (
+              {Object.keys(tiposPorSeccion).map((section) => (
                 <option key={section} value={section}>
                   {section}
                 </option>
@@ -180,7 +201,7 @@ export default function FormularioAdmin({
             <select id="type" {...register("type", { required: true })}>
               <option value="">Seleccione un tipo</option>
               {selectedSection &&
-                tiposPorSeccion[selectedSection].map(tipo => (
+                tiposPorSeccion[selectedSection].map((tipo) => (
                   <option key={tipo} value={tipo}>
                     {tipo}
                   </option>
@@ -195,7 +216,7 @@ export default function FormularioAdmin({
             <label htmlFor="image">Imagen</label>
             <input
               id="image"
-              type="url"
+              type="file"
               {...register("image", { required: true })}
             />
             {errors.image && (
@@ -261,7 +282,7 @@ export default function FormularioAdmin({
               </button>
               <button
                 className=" btn-cancelar"
-                onClick={e => {
+                onClick={(e) => {
                   e.preventDefault();
                   reset();
                   setProdEdit(null);
