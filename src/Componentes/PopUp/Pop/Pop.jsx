@@ -1,6 +1,8 @@
 import React from "react";
 import { useOrder } from "../../../context/OrderContext";
 
+const URL = import.meta.env.VITE_LOCAL_SERVER;
+
 export default function Pop({ product, cantidad }) {
   const { contador } = useOrder();
 
@@ -8,7 +10,7 @@ export default function Pop({ product, cantidad }) {
     <>
       <div className="contenedor-mensaje-pop">
         <div className="header-pop">
-          <img src={product.image} alt="" />
+          <img src={`${URL}/images/products/${product.image}`} alt="" />
         </div>
         <div className="body-pop">
           <div className="title-pop">{product.name}</div>

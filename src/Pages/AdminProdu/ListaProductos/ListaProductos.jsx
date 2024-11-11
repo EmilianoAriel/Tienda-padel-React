@@ -4,16 +4,25 @@ import axios from "axios";
 import "./ListaProductos.css";
 import Swal from "sweetalert2";
 import { MagicMotion } from "react-magic-motion";
-const URL = import.meta.env.VITE_SERVER_URL;
+import useApi from "../../../services/interceptor/interceptor";
+const URL = import.meta.env.VITE_LOCAL_SERVER;
 export default function ListaProductos({ updateKey, onEditProd }) {
   const [products, setProducts] = useState([]);
   const [searchInput, setSearchInput] = useState("");
+  const api = useApi();
+
   async function getProducts() {
     try {
-      const get = await axios.get(`${URL}/products`);
+      const get = await api.get(`/products`);
       setProducts(get.data);
-    } catch (error) {}
+      console.log(get.data);
+    } catch (error) {
+      console.error("Error al obtener productos:", error);
+    }
   }
+  useEffect(() => {
+    console.log("Products updated:", searchInput);
+  }, [products]);
 
   useEffect(() => {
     getProducts();
@@ -29,10 +38,10 @@ export default function ListaProductos({ updateKey, onEditProd }) {
       confirmButtonText: "Si,eliminar!",
       confirmButtonColor: "#d33",
       cancelButtonText: "Cancelar",
-    }).then(async result => {
+    }).then(async (result) => {
       try {
         if (result.isConfirmed) {
-          const response = await axios.delete(`${URL}/products/${id}`);
+          const response = await api.delete(`/products/${id}`);
           getProducts();
           Swal.fire({
             title: "Eliminado!",
@@ -90,16 +99,17 @@ export default function ListaProductos({ updateKey, onEditProd }) {
           <MagicMotion>
             <tbody className="body-table">
               {searchInput.length <= 0
-                ? products.map(prod => (
+                ? products.map((prod) => (
                     <Producto
-                      key={prod.id}
+                      key={prod._id}
                       producto={prod}
                       deleteProduct={deleteProduct}
                       onEditProd={onEditProd}
+                      URL={URL}
                     />
                   ))
                 : (() => {
-                    const filteredProducts = products.filter(product =>
+                    const filteredProducts = products.filter((product) =>
                       product.name
                         .toLowerCase()
                         .includes(searchInput.toLowerCase())
@@ -113,12 +123,13 @@ export default function ListaProductos({ updateKey, onEditProd }) {
                       );
                     }
 
-                    return filteredProducts.map(prod => (
+                    return filteredProducts.map((prod) => (
                       <Producto
-                        key={prod.id}
+                        key={prod._id}
                         producto={prod}
                         deleteProduct={deleteProduct}
                         onEditProd={onEditProd}
+                        URL={URL}
                       />
                     ));
                   })()}

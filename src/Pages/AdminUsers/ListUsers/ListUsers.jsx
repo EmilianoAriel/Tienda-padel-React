@@ -16,11 +16,7 @@ export default function ListUser({ updateKey, onEditUs }) {
   const [searchInput, setSearchInput] = useState("");
   async function getProducts() {
     try {
-      const get = await api.get(`/users`, {
-        headers: {
-          authorization: token,
-        },
-      });
+      const get = await api.get(`/users`);
       setUsers(get.data);
     } catch (error) {}
   }

@@ -32,15 +32,14 @@ export default function FormUser({ onFormSubmit, userEdit, setUserEdit }) {
 
       if (userEdit) {
         const { _id: id } = userEdit;
-        formData.delete("image");
-        if (producto.image[0]) {
-          formData.delete("image"); // Limpiar cualquier imagen anterior
-          formData.append("image", producto.image[0]); // Añadir la nueva imagen
+        const image = producto.image[0];
+        if (image && image !== "UserDefault.jfif") {
+          formData.delete("image");
+          formData.append("image", image);
+          console.log(image);
         }
 
         const response = await api.put(`/users/${id}`, formData);
-
-        console.log(producto.image);
 
         Swal.fire({
           title: "Actualizado!",
@@ -80,7 +79,6 @@ export default function FormUser({ onFormSubmit, userEdit, setUserEdit }) {
         email: userEdit.email,
         password: userEdit.password,
         location: userEdit.location,
-        image: userEdit.image,
       });
     } else {
       reset({

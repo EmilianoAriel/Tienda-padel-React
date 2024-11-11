@@ -5,7 +5,7 @@ import { faBookmark } from "@fortawesome/free-regular-svg-icons";
 import { formatPrice } from "../Utilis/formatPrice";
 import "./card.css";
 import { useOrder } from "../context/OrderContext";
-
+const URL = import.meta.env.VITE_LOCAL_SERVER;
 export default function Card({ product }) {
   const { addProduct } = useOrder();
   return (
@@ -22,7 +22,7 @@ export default function Card({ product }) {
             <img
               className="img-producto"
               id="imagen-producto"
-              src={product.image}
+              src={`${URL}/images/products/${product.image}`}
               title={product.name}
               alt={`Imagen ${product.name}`}
               loading="lazy"
@@ -45,13 +45,13 @@ export default function Card({ product }) {
           <NavLink
             className="link-producto"
             id="titulo-producto"
-            to={`/detalles/${product.id}`}
+            to={`/detalles/${product._id}`}
           >
             {product.name}
           </NavLink>
         </div>
         <div className="precios">
-          {product.promo.trim() !== "" ? (
+          {product.promo ? (
             <div className="precio">
               <span className="span-precio" id="precio-promo">
                 {formatPrice(product.promo)}

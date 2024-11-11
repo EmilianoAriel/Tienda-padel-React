@@ -1,4 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import useApi from "../services/interceptor/interceptor";
+import { json } from "react-router-dom";
 
 const OrderContext = createContext();
 
@@ -13,13 +15,15 @@ export default function OrderProvider({ children }) {
   const [popVisible, setPopVisible] = useState(false);
   const [cantidadPop, setCantidadPop] = useState(1);
   const [filters, setFilters] = useState([]);
+  const api = useApi();
   useEffect(() => {
     incCount();
     calcularTotal();
+    console.log(order);
   }, [order]);
 
   function addProduct(product, cantidad) {
-    const prodExist = order.find(prod => prod.id === product.id);
+    const prodExist = order.find((prod) => prod._id === product._id);
 
     if (cantidad) {
       if (prodExist) {
@@ -65,7 +69,7 @@ export default function OrderProvider({ children }) {
   function calcularTotal() {
     let total = 0;
 
-    order.forEach(item => {
+    order.forEach((item) => {
       if (item.promo) {
         total += item.promo * item.quantity;
       } else {
@@ -77,9 +81,9 @@ export default function OrderProvider({ children }) {
   }
 
   function removeProduct(id) {
-    const indice = order.findIndex(prod => prod.id === id);
+    const indice = order.findIndex((prod) => prod._id === id);
 
-    const orderFiltered = order.filter(prod => prod.id !== id);
+    const orderFiltered = order.filter((prod) => prod._id !== id);
     setOrder(orderFiltered);
   }
 
@@ -93,6 +97,38 @@ export default function OrderProvider({ children }) {
   function sumProduct(id) {
     id.quantity++;
     setOrder([...order]);
+  }
+
+  async function finishOrder() {
+    try {
+      const user = JSON.parse(localStorage.getItem("user"));
+
+      const orderProducts = {
+        products: order.map((item) => ({
+          name: item.name,
+          price: item.promo || item.price,
+          description: item.description,
+          quantity: item.quantity,
+        })),
+      };
+
+      const orderData = {
+        user: user._id,
+        orders: [orderProducts],
+      };
+
+      const response = await api.post("/orders", orderData);
+
+      if (response.data.initPoint) {
+        window.location.href = response.data.initPoint;
+      } else {
+        console.log("No se encontró el initPoint");
+      }
+
+      console.log("Orden enviada:", response.data);
+    } catch (error) {
+      console.log("A ocurrido un error en el front:", error);
+    }
   }
 
   return (
@@ -115,6 +151,7 @@ export default function OrderProvider({ children }) {
         popVisible,
         filters,
         setFilters,
+        finishOrder,
       }}
     >
       {children}
