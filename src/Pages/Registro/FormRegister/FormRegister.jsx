@@ -172,6 +172,7 @@ export default function FormRegister({ change }) {
 
           <div className="input-register">
             <input
+              accept="image/*"
               type="file"
               name="image"
               id="image"

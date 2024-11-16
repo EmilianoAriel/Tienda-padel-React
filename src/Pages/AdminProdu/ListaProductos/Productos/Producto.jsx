@@ -4,7 +4,6 @@ import { formatPrice } from "../../../../Utilis/formatPrice";
 import React from "react";
 
 export default function Producto({ URL, producto, deleteProduct, onEditProd }) {
-  console.log(producto);
   return (
     <>
       <tr className="lista-produ">

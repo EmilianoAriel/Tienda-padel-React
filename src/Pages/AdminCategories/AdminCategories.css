@@ -1,0 +1,102 @@
+.contenedor-categoria {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  width: 100;
+  height: auto;
+  margin-top: 100px;
+  align-items: center;
+
+  table {
+    margin-top: 30px;
+    border-collapse: collapse;
+    width: 60vw;
+  }
+}
+
+.contenedor-add-categorias {
+  display: flex;
+  flex-direction: row;
+  width: 60vw;
+  height: 60px;
+  border-radius: 5px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+
+  div {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+    height: auto;
+
+    align-content: center;
+  }
+
+  .seccion {
+    width: 11.7vw;
+  }
+
+  .agregar {
+    width: 15.7vw;
+  }
+
+  .seccion,
+  .agregar {
+    flex: 0 1 auto;
+  }
+
+  .tipos {
+    flex: 1;
+  }
+
+  .btn-plus,
+  .btn-agregar,
+  .btn-guardar {
+    padding: 5px 10px;
+    margin: 2px;
+    border: none;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+    border-radius: 10px;
+    color: white;
+    transition: transform 0.3s ease-out;
+    background-color: rgb(110, 1, 205);
+    &:active {
+      transform: scale(0.5);
+    }
+  }
+
+  .btn-guardar {
+    width: 110px;
+    background-color: rgb(93, 205, 1);
+  }
+
+  .cancelar {
+    background-color: crimson;
+  }
+
+  .contenedor-botones {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    height: 50px;
+    border: none;
+  }
+
+  .input-add {
+    border: none;
+    outline: none;
+    background-color: rgb(227, 226, 226);
+    width: 80%;
+    height: 90%;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 15px;
+  }
+}

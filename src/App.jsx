@@ -12,6 +12,7 @@ import AdminUser from "./Pages/AdminUsers/AdminUser";
 import Login from "./Pages/Login/Login";
 import Layout from "./Componentes/Layout";
 import AdminGuard from "./services/guard/AdminGuard";
+import AdminCategories from "./Pages/AdminCategories/AdminCategories";
 
 function App() {
   return (
@@ -29,6 +30,8 @@ function App() {
           <Route path="/acercaDe" element={<AcercaDe />} />
 
           <Route path="/registro" element={<Registro />} />
+
+          <Route path="/categories" element={<AdminCategories />} />
 
           <Route
             path="/adminProdu"

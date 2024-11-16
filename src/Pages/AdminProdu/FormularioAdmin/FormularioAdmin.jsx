@@ -12,18 +12,9 @@ export default function FormularioAdmin({
   prodEdit,
   setProdEdit,
 }) {
-  const tiposPorSeccion = {
-    Bolsos: ["Mochila", "Bolso"],
-    Grip: ["Antideslizante", "Absorbente"],
-    Paletas: ["Attack", "Control"],
-    Pantalones: ["Cortos", "Largos"],
-    Pelotas: ["Softh", "Air Softh", "Tenis"],
-    Remeras: ["Manga corta", "Manga larga", "Sin mangas"],
-    Zapatillas: ["Running", "Casual", "Deporte"],
-    Prueba: [],
-  };
-
+  const [categories, setCategories] = useState([]);
   const [selectedSection, setSelectedSection] = useState("");
+  const [tipos, setTipos] = useState([]);
   const {
     register,
     handleSubmit,
@@ -51,7 +42,6 @@ export default function FormularioAdmin({
       if (producto.image[0]) {
         formData.append("image", producto.image[0]);
       }
-      console.log(formData);
 
       if (prodEdit) {
         const { _id: id } = prodEdit;
@@ -122,6 +112,38 @@ export default function FormularioAdmin({
     }
   }, [prodEdit, reset]);
 
+  async function getCategorias() {
+    try {
+      const sections = await api.get("/categories");
+
+      const categorias = sections.data.section.map((item) => item.category);
+
+      setCategories(categorias);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function getTypes() {
+    try {
+      const types = await api.get(`/categories/${selectedSection}`);
+
+      setTipos(types.data.types);
+
+      console.log(tipos);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    getTypes();
+  }, [selectedSection]);
+
+  useEffect(() => {
+    getCategorias();
+  }, []);
+
   return (
     <>
       <div className="contenedor-form">
@@ -185,8 +207,8 @@ export default function FormularioAdmin({
               onChange={handleSectionChange}
             >
               <option value="">Seleccione una sección</option>
-              {Object.keys(tiposPorSeccion).map((section) => (
-                <option key={section} value={section}>
+              {categories.map((section) => (
+                <option key={section._id} value={section}>
                   {section}
                 </option>
               ))}
@@ -200,12 +222,11 @@ export default function FormularioAdmin({
             <label htmlFor="type">Tipo de producto</label>
             <select id="type" {...register("type", { required: true })}>
               <option value="">Seleccione un tipo</option>
-              {selectedSection &&
-                tiposPorSeccion[selectedSection].map((tipo) => (
-                  <option key={tipo} value={tipo}>
-                    {tipo}
-                  </option>
-                ))}
+              {tipos?.map((tipo) => (
+                <option key={tipo} value={tipo}>
+                  {tipo}
+                </option>
+              ))}
             </select>
             {errors.type && (
               <div className="input-error">El tipo es requerida</div>
