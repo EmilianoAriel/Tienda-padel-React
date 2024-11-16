@@ -15,14 +15,11 @@ export default function ListaProductos({ updateKey, onEditProd }) {
     try {
       const get = await api.get(`/products`);
       setProducts(get.data);
-      console.log(get.data);
     } catch (error) {
       console.error("Error al obtener productos:", error);
     }
   }
-  useEffect(() => {
-    console.log("Products updated:", searchInput);
-  }, [products]);
+  useEffect(() => {}, [products]);
 
   useEffect(() => {
     getProducts();
@@ -64,7 +61,6 @@ export default function ListaProductos({ updateKey, onEditProd }) {
   function search(event) {
     const Value = event.target.value;
     setSearchInput(Value);
-    console.log(Value);
   }
 
   return (
