@@ -120,7 +120,7 @@ export default function NavBar({ setModal, showModal }) {
               </>
             ) : (
               <NavLink className="nav-link" to="/login">
-                Iniciar secion
+                Iniciar sesion
               </NavLink>
             )}
           </div>

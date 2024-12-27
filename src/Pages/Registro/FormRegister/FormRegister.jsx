@@ -7,6 +7,7 @@ import { faLock } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import Swal from "sweetalert2";
 import useApi from "../../../services/interceptor/interceptor";
+import { NavLink } from "react-router-dom";
 
 const URL = import.meta.env.VITE_SERVER_URL;
 
@@ -211,9 +212,9 @@ export default function FormRegister({ change }) {
             Registrese
           </button>
         </form>
-        <button className="btn-IS" onClick={() => change()}>
+        <NavLink className="btn-IS" to="/login">
           Iniciar Sesion
-        </button>
+        </NavLink>
       </div>
     </>
   );
