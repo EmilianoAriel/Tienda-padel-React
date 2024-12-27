@@ -1,15 +1,15 @@
 //creame una tabla de categorias y botones para editar y borrar que tenga categorias y subcategorias
 
-import React, { useState, useEffect, act } from "react";
+import React, { useState, useEffect } from "react";
 
 import Swal from "sweetalert2";
 import useApi from "../../services/interceptor/interceptor";
 import "./AdminCategories.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencil, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
-import { set, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
-const AdminCategories = () => {
+export default function AdminCategories() {
   const [categories, setCategories] = useState([]);
 
   const [tipos, setTipos] = useState([]);
@@ -29,7 +29,7 @@ const AdminCategories = () => {
   const api = useApi();
   useEffect(() => {
     fetchCategories();
-  }, [active]);
+  }, [active, isEditing]);
 
   async function fetchCategories() {
     try {
@@ -43,14 +43,21 @@ const AdminCategories = () => {
     }
   }
 
-  async function createCategories() {
+  async function createCategories(categoria) {
     try {
+      const arrayTypes = Array.isArray(categoria.types)
+        ? categoria.types
+        : categoria.types.split(",").map((type) => type.trim());
+      const newSection = {
+        category: categoria.category,
+        types: arrayTypes,
+      };
+
       if (isEditing) {
         const { _id: id } = selectedCategory;
-        const response = await api.put(`/categories/${id}`, {
-          category: newCategory,
-          types: newSubcategory,
-        });
+        console.log(id);
+
+        const response = await api.put(`/categories/${id}`, newSection);
 
         Swal.fire({
           icon: "success",
@@ -61,16 +68,10 @@ const AdminCategories = () => {
 
         console.log(response.data);
         setIsEditing(false);
+        setActive(false);
 
         return;
       } else {
-        const arrayTypes = newSubcategory.split(",").map((type) => type.trim());
-
-        const newSection = {
-          category: newCategory,
-          types: arrayTypes,
-        };
-
         const response = await api.post("/categories", newSection);
         Swal.fire({
           icon: "success",
@@ -81,6 +82,8 @@ const AdminCategories = () => {
         console.log(response.data);
         setActive(false);
       }
+      reset();
+      fetchCategories();
     } catch (error) {
       console.error("Error al crear la categoria:", error);
     }
@@ -93,12 +96,34 @@ const AdminCategories = () => {
   }
 
   async function handleDelete(category) {
-    try {
-      await api.delete(`/categories/${category._id}`);
-      fetchCategories();
-    } catch (error) {
-      console.error("Error al eliminar la categoria:", error);
-    }
+    Swal.fire({
+      title: "Eliminar Categoria!",
+      text: "Seguro que quiere eliminar esta categoria?",
+      icon: "warning",
+      reverseButtons: true,
+      showCancelButton: true,
+      confirmButtonText: "Si,eliminar!",
+      confirmButtonColor: "#d33",
+      cancelButtonText: "Cancelar",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          await api.delete(`/categories/${category._id}`);
+          fetchCategories();
+
+          Swal.fire({
+            title: "Eliminado!",
+            text: "Tu categoria se a eliminado correctamente.",
+            icon: "success",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          reset();
+        } catch (error) {
+          console.error("Error al eliminar la categoria:", error);
+        }
+      }
+    });
   }
 
   useEffect(() => {
@@ -113,7 +138,7 @@ const AdminCategories = () => {
         types: "",
       });
     }
-  }, [isEditing, reset]);
+  }, [isEditing, selectedCategory, reset]);
 
   return (
     <div className="contenedor-categoria">
@@ -151,7 +176,7 @@ const AdminCategories = () => {
         </tbody>
       </table>
 
-      <form action={handleSubmit(createCategories)}>
+      <form onSubmit={handleSubmit(createCategories)}>
         <div className="contenedor-add-categorias">
           <div className="seccion">
             <input
@@ -179,7 +204,10 @@ const AdminCategories = () => {
                 </button>
                 <button
                   className="btn-guardar cancelar"
-                  onClick={() => setIsEditing(false)}
+                  onClick={() => {
+                    setIsEditing(false);
+                    reset();
+                  }}
                 >
                   Cancelar
                 </button>
@@ -198,6 +226,4 @@ const AdminCategories = () => {
       </form>
     </div>
   );
-};
-
-export default AdminCategories;
+}

@@ -7,6 +7,8 @@ import MainComponents from "./Main/MainComponents";
 import { useOrder } from "../../context/OrderContext";
 import { useUser } from "../../context/UserContext";
 import useApi from "../../services/interceptor/interceptor";
+import SegundoBaner from "./Baner/SegundoBaner/SegundoBaner";
+import FooterInicio from "./FooterInicio/FooterInicio";
 const URL = import.meta.env.VITE_SERVER_URL;
 
 export default function Inicio() {
@@ -56,9 +58,13 @@ export default function Inicio() {
 
       <MainComponents key="promo" title="Promo" cards={promoCards} />
 
+      <SegundoBaner />
+
       {sections.map((section) => (
         <MainComponents key={section} title={section} cards={cards} />
       ))}
+
+      <FooterInicio />
     </>
   );
 }

@@ -1,0 +1,42 @@
+.section-banner-hmn {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  .contenedor-img-banner {
+    display: flex;
+    transition: 0.5s;
+    img {
+      object-fit: cover;
+      width: 100%;
+      height: 750px;
+      transition: 0.3s;
+    }
+
+    img:hover {
+      transform: scale(1.1);
+    }
+  }
+}
+
+@media screen and (width < 760px) {
+  .titulo-dos {
+    text-align: center;
+  }
+
+  .msj-dos {
+    height: 350px;
+  }
+
+  .contenedor-img-banner {
+    flex-direction: column;
+  }
+
+  .pie-main {
+    flex-direction: column;
+
+    .span-pie {
+      font-size: 20px;
+    }
+  }
+}

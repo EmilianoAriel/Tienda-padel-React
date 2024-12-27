@@ -1,0 +1,37 @@
+.pie-main {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  & .info-pie {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    width: 100%;
+    font-size: 30px;
+    gap: 30px;
+    color: white;
+    & i {
+      font-size: 70px;
+    }
+  }
+
+  & .primario {
+    background-color: #86cb18;
+  }
+
+  & .secundario {
+    background-color: #06b112;
+  }
+}
+
+@media screen and (width < 760px) {
+  .pie-main {
+    flex-direction: column;
+
+    .span-pie {
+      font-size: 20px;
+    }
+  }
+}
